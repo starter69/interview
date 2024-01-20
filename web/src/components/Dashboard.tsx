@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getHelloWorldMsg } from "../api/index";
+import { getHelloWorldMsg } from "../api";
 
 const MyNavbar = () => {
   const [msg, setMsg] = useState();

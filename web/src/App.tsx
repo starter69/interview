@@ -1,13 +1,11 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { ConfigProvider } from "antd";
-import { Button } from "antd";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <Button type="primary">Button</Button>
+      <RouterProvider router={router} />
     </div>
   );
 }

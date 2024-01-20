@@ -1,9 +1,9 @@
 import * as React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-const Dashboard = React.lazy(() => import("./components/Dashboard"));
+const Dashboard = React.lazy(() => import("components/Dashboard"));
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     children: [
@@ -14,5 +14,3 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-export default router;

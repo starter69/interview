@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getHelloWorldMsg } from "../api";
+import { getHelloWorldMsg } from "api";
 
-const MyNavbar = () => {
+const Dashboard = () => {
   const [msg, setMsg] = useState();
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const MyNavbar = () => {
   return <h1>{msg}</h1>;
 };
 
-export default MyNavbar;
+export default Dashboard;

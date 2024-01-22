@@ -3,7 +3,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Interview {
+model interviews {
   id       Int      @id @default(autoincrement())
   user_id  Int      @unique
   name     String
@@ -12,14 +12,14 @@ model Interview {
   path     String
 }
 
-model Teams {
-  id        Int    @id @default(autoincrement())
-  team_name String @unique
+model teams {
+  id   Int    @id @default(autoincrement())
+  name String @unique
 }
 
-model User {
+model users {
   id       Int    @id @default(autoincrement())
-  username String @unique
+  name     String @unique
   password String
   team_id  Int    @unique
   role     Role

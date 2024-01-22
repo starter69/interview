@@ -1,0 +1,32 @@
+datasource db {
+  provider = "postgresql" // or another supported database
+  url      = env("DATABASE_URL")
+}
+
+model interviews {
+  id       Int      @id @default(autoincrement())
+  user_id  Int      @unique
+  name     String
+  date     DateTime
+  duration Int
+  path     String
+}
+
+model teams {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model users {
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+  password String
+  team_id  Int    @unique
+  role     Role
+}
+
+enum Role {
+  ADMIN
+  LEAD
+  USER
+}

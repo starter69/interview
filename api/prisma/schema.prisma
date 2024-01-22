@@ -1,3 +1,8 @@
+datasource db {
+  provider = "postgresql" // or another supported database
+  url      = env("DATABASE_URL")
+}
+
 model Interview {
   id       Int      @id @default(autoincrement())
   user_id  Int      @unique
@@ -22,5 +27,6 @@ model User {
 
 enum Role {
   ADMIN
+  LEAD
   USER
 }

@@ -1,10 +1,4 @@
-export type UserLoginRequest = {
+export type AuthRequest = {
 	name: string
 	password: string
-}
-
-export type UserRegisterRequest = {
-	name: string
-	password: string
-	confirm: string
 }

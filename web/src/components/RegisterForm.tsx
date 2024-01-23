@@ -2,14 +2,26 @@ import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { AuthRequest } from 'api/types'
 
-interface LogInFormProps extends AuthRequest {
+interface RegisterProps extends AuthRequest {
 	onSubmit: (values: AuthRequest) => void
 }
 
-const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
+const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 	const handleSubmit = (credentials: AuthRequest) => {
 		onSubmit(credentials)
 	}
+
+	const validateConfirmPassword = (_: any, value: string) => {
+		const { getFieldValue } = form
+
+		if (value && getFieldValue('password') === value) {
+			return Promise.resolve()
+		}
+
+		return Promise.reject('The two passwords that you entered do not match!')
+	}
+
+	const [form] = Form.useForm()
 
 	return (
 		<div
@@ -21,6 +33,7 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
 			}}
 		>
 			<Form
+				form={form}
 				name='basic'
 				labelCol={{ span: 8 }}
 				wrapperCol={{ span: 16 }}
@@ -35,7 +48,6 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
 				>
 					<Input />
 				</Form.Item>
-
 				<Form.Item<AuthRequest>
 					label='Password'
 					name='password'
@@ -44,9 +56,21 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
 					<Input.Password />
 				</Form.Item>
 
+				<Form.Item
+					label='Confirm Password'
+					name='passwordConfirm'
+					dependencies={['password']}
+					rules={[
+						{ required: true, message: 'Please confirm your password!' },
+						{ validator: validateConfirmPassword },
+					]}
+				>
+					<Input.Password />
+				</Form.Item>
+
 				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
 					<Button type='primary' htmlType='submit'>
-						Sign In
+						Sign Up
 					</Button>
 				</Form.Item>
 			</Form>
@@ -54,4 +78,4 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
 	)
 }
 
-export default LogInForm
+export default Register

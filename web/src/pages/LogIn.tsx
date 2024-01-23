@@ -1,12 +1,12 @@
 import LogInForm from 'components/LogInForm'
 import { userLogin } from 'api'
-import { UserLoginRequest } from 'api/types'
+import { AuthRequest } from 'api/types'
 import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
 	const navigate = useNavigate()
-	const handleSubmit = (values: UserLoginRequest) => {
+	const handleSubmit = (values: AuthRequest) => {
 		userLogin({ name: values.name, password: values.password })
 			.then((response) => {
 				localStorage.setItem('authToken', response.data.access_token)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { UserLoginRequest, UserRegisterRequest } from './types'
+import { AuthRequest } from './types'
 
 const host = process.env.REACT_APP_API_HOST || 'localhost'
 const port = process.env.REACT_APP_API_PORT || 3001
@@ -26,10 +26,10 @@ apiService.interceptors.request.use(
 export const getHelloWorldMsg = () => apiService.get('/hello-world')
 
 // Auth
-export const userLogin = (data: UserLoginRequest) =>
+export const userLogin = (data: AuthRequest) =>
 	apiService.post('/auth/signin', data)
 
-export const userRegister = (data: UserRegisterRequest) =>
+export const userRegister = (data: AuthRequest) =>
 	apiService.post('/auth/signup', data)
 
 // const createTodo = (payload: Object) => apiService.post("/end-point", payload);

@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 const Dashboard = React.lazy(() => import('pages/Dashboard'))
 const LogIn = React.lazy(() => import('pages/LogIn'))
+const Register = React.lazy(() => import('pages/Register'))
 
 export const router = createBrowserRouter([
 	{
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/signup',
-				element: <Dashboard />,
+				element: <Register />,
 			},
 		],
 	},

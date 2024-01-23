@@ -22,8 +22,8 @@ model users {
   id       Int    @id @default(autoincrement())
   name     String @unique
   password String
-  team     teams  @relation(fields: [team_id], references: [id])
-  team_id  Int
+  team     teams?  @relation(fields: [team_id], references: [id])
+  team_id  Int?
   role     Role
 }
 

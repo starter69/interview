@@ -11,7 +11,6 @@ async function main() {
 	for (let i = 1; i <= 9; i++) {
 		teamArray.push(`Team ${i}`)
 	}
-	teamArray.push('Admins')
 
 	for (const [index, record] of teamArray.entries()) {
 		await prisma.teams.create({ data: { id: index + 1, name: record } })
@@ -24,14 +23,12 @@ async function main() {
 			id: 1,
 			name: 'stronghold',
 			password: '12345678',
-			team_id: 10,
 			role: Role.ADMIN,
 		},
 		{
 			id: 2,
 			name: 'wizard',
 			password: '12345678',
-			team_id: 10,
 			role: Role.ADMIN,
 		},
 		// team 1 =>
@@ -359,7 +356,7 @@ async function main() {
 				id: user.id,
 				name: user.name,
 				password: await argon.hash(user.password),
-				team_id: user.team_id,
+				team_id: user.team_id ? user.team_id : undefined,
 				role: user.role,
 			},
 		})

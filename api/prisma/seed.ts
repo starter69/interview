@@ -1,4 +1,5 @@
 import { PrismaClient, Role } from '@prisma/client'
+import * as argon from 'argon2'
 
 const prisma = new PrismaClient()
 
@@ -357,7 +358,7 @@ async function main() {
 			data: {
 				id: user.id,
 				name: user.name,
-				password: user.password,
+				password: await argon.hash(user.password),
 				team_id: user.team_id,
 				role: user.role,
 			},

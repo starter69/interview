@@ -1,19 +1,5 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Interview` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Teams` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "Interview";
-
--- DropTable
-DROP TABLE "Teams";
-
--- DropTable
-DROP TABLE "User";
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'LEAD', 'USER');
 
 -- CreateTable
 CREATE TABLE "interviews" (
@@ -40,7 +26,7 @@ CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "team_id" INTEGER NOT NULL,
+    "team_id" INTEGER,
     "role" "Role" NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
@@ -55,5 +41,5 @@ CREATE UNIQUE INDEX "teams_name_key" ON "teams"("name");
 -- CreateIndex
 CREATE UNIQUE INDEX "users_name_key" ON "users"("name");
 
--- CreateIndex
-CREATE UNIQUE INDEX "users_team_id_key" ON "users"("team_id");
+-- AddForeignKey
+ALTER TABLE "users" ADD CONSTRAINT "users_team_id_fkey" FOREIGN KEY ("team_id") REFERENCES "teams"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -11,8 +11,9 @@ const Register = () => {
 			name: values.name,
 			password: values.password,
 		})
-			.then(() => {
-				message.success('Registered Successfully')
+			.then((response) => {
+				message.success('Registered and logged in successfully')
+				localStorage.setItem('authToken', response.data.access_token)
 				navigate('/dashboard')
 			})
 			.catch((error) => {

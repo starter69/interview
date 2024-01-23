@@ -15,13 +15,15 @@ model interviews {
 model teams {
   id   Int    @id @default(autoincrement())
   name String @unique
+  users users[]
 }
 
 model users {
   id       Int    @id @default(autoincrement())
   name     String @unique
   password String
-  team_id  Int    @unique
+  team     teams  @relation(fields: [team_id], references: [id])
+  team_id  Int
   role     Role
 }
 
@@ -29,4 +31,8 @@ enum Role {
   ADMIN
   LEAD
   USER
+}
+
+generator client {
+  provider = "prisma-client-js"
 }

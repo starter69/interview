@@ -14,6 +14,7 @@ export const useAuth = () => {
 					navigate('/dashboard')
 				})
 				.catch(() => {})
+		// eslint-disable-next-line
 	}, [])
 
 	return {

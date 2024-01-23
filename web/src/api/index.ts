@@ -29,6 +29,8 @@ export const getHelloWorldMsg = () => apiService.get('/hello-world')
 export const userLogin = (data: AuthRequest) =>
 	apiService.post('/auth/signin', data)
 
+export const getUser = () => apiService.get('/user')
+
 export const userRegister = (data: AuthRequest) =>
 	apiService.post('/auth/signup', data)
 

@@ -2,10 +2,10 @@ import LogInForm from 'components/LogInForm'
 import { userLogin } from 'api'
 import { AuthRequest } from 'api/types'
 import { message } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { useAuth } from 'utils/useAuth'
 
 const LogIn = () => {
-	const navigate = useNavigate()
+	const { navigate } = useAuth()
 	const handleSubmit = (values: AuthRequest) => {
 		userLogin({ name: values.name, password: values.password })
 			.then((response) => {

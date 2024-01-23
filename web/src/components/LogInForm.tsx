@@ -49,6 +49,11 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
 						Sign In
 					</Button>
 				</Form.Item>
+
+				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+					<span style={{ marginRight: '8px' }}>Don't have an account?</span>
+					<a href='/signup'>Sign Up</a>
+				</Form.Item>
 			</Form>
 		</div>
 	)

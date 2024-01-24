@@ -28,7 +28,9 @@ export class AuthService {
 		} catch (error) {
 			if (error instanceof PrismaClientKnownRequestError) {
 				if (error.code === 'P2002') {
-					throw new ForbiddenException('Credentials taken')
+					throw new ForbiddenException(
+						'This username is already in use. Please choose a different username to complete the registration process.'
+					)
 				}
 				throw error
 			}
@@ -41,11 +43,11 @@ export class AuthService {
 		})
 
 		if (!user) {
-			throw new ForbiddenException('Credentials incorrect')
+			throw new ForbiddenException('The username you entered does not exist. ')
 		}
 
 		if (!(await argon.verify(user.password, dto.password))) {
-			throw new ForbiddenException('Credentials incorrect')
+			throw new ForbiddenException('The password you entered is incorrect.')
 		}
 
 		return this.signToken(user.id, user.name)

@@ -1,10 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common'
 
 @Controller('hello-world')
 export class HelloWorldController {
   @Get()
   helloWorldHandler() {
     // Handle the request logic here
-    return 'Welcome to interview logger!';
+    return 'Welcome to interview logger!'
   }
 }

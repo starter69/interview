@@ -3,21 +3,21 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const useAuth = () => {
-	const navigate = useNavigate()
+  const navigate = useNavigate()
 
-	useEffect(() => {
-		const token = localStorage.getItem('authToken')
+  useEffect(() => {
+    const token = localStorage.getItem('authToken')
 
-		if (token)
-			getUser()
-				.then(() => {
-					navigate('/dashboard')
-				})
-				.catch(() => {})
-		// eslint-disable-next-line
-	}, [])
+    if (token)
+      getUser()
+        .then(() => {
+          navigate('/dashboard')
+        })
+        .catch(() => {})
+    // eslint-disable-next-line
+  }, [])
 
-	return {
-		navigate,
-	}
+  return {
+    navigate,
+  }
 }

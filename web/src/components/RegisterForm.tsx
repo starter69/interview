@@ -76,6 +76,13 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 						Sign Up
 					</Button>
 				</Form.Item>
+
+				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+					<span style={{ marginRight: '8px' }}>
+						Already Registered User? Click here to login
+					</span>
+					<a href='/signin'>Sign In</a>
+				</Form.Item>
 			</Form>
 		</div>
 	)

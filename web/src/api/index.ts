@@ -33,3 +33,7 @@ export const getUser = () => apiService.get('/user')
 
 export const userRegister = (data: UserRegisterRequest) =>
   apiService.post('/auth/signup', data)
+
+// Teams
+
+export const getTeamNameList = () => apiService.get('/team')

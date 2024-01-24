@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { getTeamNameList } from 'api'
 import { Button, Form, Input, Select } from 'antd'
-import { UserRegisterRequest } from 'api/types'
+import { ReferenceType, UserRegisterRequest } from 'api/types'
 
 interface RegisterProps extends UserRegisterRequest {
   onSubmit: (values: UserRegisterRequest) => void
 }
 
 const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
+  const [teams, setTeams] = useState([])
+
+  useEffect(() => {
+    ;(async () => setTeams((await getTeamNameList()).data))()
+  }, [])
+
   const [form] = Form.useForm()
   const [isPasswordMatch, setIsPasswordMatch] = useState(false)
 
@@ -59,11 +66,12 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
         >
           <Select allowClear>
             <Select.Option>Board of directors</Select.Option>
-            <Select.Option value='1'>Team 1</Select.Option>
-            <Select.Option value='2'>Team 2</Select.Option>
-            <Select.Option value='3'>Team 3</Select.Option>
-            <Select.Option value='4'>Team 4</Select.Option>
-            <Select.Option value='5'>Team 5</Select.Option>
+            {teams &&
+              teams.map((team: ReferenceType) => (
+                <Select.Option key={team.id} value={team.id.toString()}>
+                  {team.name}
+                </Select.Option>
+              ))}
           </Select>
         </Form.Item>
 

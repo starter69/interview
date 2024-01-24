@@ -7,6 +7,7 @@ import { HelloWorldController } from './hello-world/hello-world.controller'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { PrismaModule } from './prisma/prisma.module'
+import { TeamModule } from './team/team.module'
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module'
     AuthModule,
     UserModule,
     PrismaModule,
+    TeamModule,
   ],
   controllers: [AppController, HelloWorldController],
   providers: [AppService],

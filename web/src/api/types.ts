@@ -13,3 +13,8 @@ export type UserInfo = {
   team_id: number
   role: string
 }
+
+export type ReferenceType = {
+  id: number
+  name: string
+}

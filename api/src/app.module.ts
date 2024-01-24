@@ -9,13 +9,13 @@ import { UserModule } from './user/user.module'
 import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
-	imports: [
-		ConfigModule.forRoot({ isGlobal: true }),
-		AuthModule,
-		UserModule,
-		PrismaModule,
-	],
-	controllers: [AppController, HelloWorldController],
-	providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    UserModule,
+    PrismaModule,
+  ],
+  controllers: [AppController, HelloWorldController],
+  providers: [AppService],
 })
 export class AppModule {}

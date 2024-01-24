@@ -7,11 +7,11 @@ import { JwtGuard } from 'src/auth/guard/jwt.guard'
 @UseGuards(JwtGuard)
 @Controller('user')
 export class UserController {
-	@Get('')
-	getMe(@GetUser() user: users) {
-		return user
-	}
+  @Get('')
+  getMe(@GetUser() user: users) {
+    return user
+  }
 
-	@Patch()
-	updateUser() {}
+  @Patch()
+  updateUser() {}
 }

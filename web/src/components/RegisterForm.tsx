@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { Button, Form, Input } from 'antd'
-import { AuthRequest } from 'api/types'
+import { Button, Form, Input, Select } from 'antd'
+import { UserRegisterRequest } from 'api/types'
 
-interface RegisterProps extends AuthRequest {
-	onSubmit: (values: AuthRequest) => void
+interface RegisterProps extends UserRegisterRequest {
+	onSubmit: (values: UserRegisterRequest) => void
 }
 
 const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 	const [form] = Form.useForm()
 	const [isPasswordMatch, setIsPasswordMatch] = useState(false)
 
-	const handleSubmit = (credentials: AuthRequest) => {
+	const handleSubmit = (credentials: UserRegisterRequest) => {
 		onSubmit(credentials)
 	}
 
@@ -44,14 +44,30 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 				onFinish={handleSubmit}
 				autoComplete='off'
 			>
-				<Form.Item<AuthRequest>
+				<Form.Item<UserRegisterRequest>
 					label='Username'
 					name='name'
 					rules={[{ required: true, message: 'Please input your username!' }]}
 				>
 					<Input />
 				</Form.Item>
-				<Form.Item<AuthRequest>
+
+				<Form.Item<UserRegisterRequest>
+					label='Team ID'
+					name='team_id'
+					rules={[{ message: 'Please select your team!' }]}
+				>
+					<Select allowClear>
+						<Select.Option>Board of directors</Select.Option>
+						<Select.Option value='1'>Team 1</Select.Option>
+						<Select.Option value='2'>Team 2</Select.Option>
+						<Select.Option value='3'>Team 3</Select.Option>
+						<Select.Option value='4'>Team 4</Select.Option>
+						<Select.Option value='5'>Team 5</Select.Option>
+					</Select>
+				</Form.Item>
+
+				<Form.Item<UserRegisterRequest>
 					label='Password'
 					name='password'
 					rules={[{ required: true, message: 'Please input your password!' }]}

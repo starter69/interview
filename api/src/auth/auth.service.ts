@@ -4,7 +4,7 @@ import * as argon from 'argon2'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 
 import { PrismaService } from 'src/prisma/prisma.service'
-import { AuthDTO } from './dto'
+import { LoginDto, RegisterDto } from './dto'
 import { ConfigService } from '@nestjs/config'
 import { Role } from '@prisma/client'
 
@@ -16,12 +16,17 @@ export class AuthService {
 		private config: ConfigService
 	) {}
 
-	async signup(dto: AuthDTO) {
+	async signup(dto: RegisterDto) {
 		const password = await argon.hash(dto.password)
 
 		try {
 			const user = await this.prisma.users.create({
-				data: { name: dto.name, password, role: Role.USER },
+				data: {
+					name: dto.name,
+					password,
+					team_id: dto.team_id ? dto.team_id : null,
+					role: Role.USER,
+				},
 			})
 
 			return this.signToken(user.id, user.name)
@@ -37,7 +42,7 @@ export class AuthService {
 		}
 	}
 
-	async signin(dto: AuthDTO) {
+	async signin(dto: LoginDto) {
 		const user = await this.prisma.users.findUnique({
 			where: { name: dto.name },
 		})

@@ -1,6 +1,10 @@
-export type AuthRequest = {
+export type UserLogInRequest = {
 	name: string
 	password: string
+}
+
+export type UserRegisterRequest = UserLogInRequest & {
+	team_id?: number
 }
 
 export type UserInfo = {

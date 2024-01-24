@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
-import { AuthRequest } from 'api/types'
+import { UserLogInRequest } from 'api/types'
 
-interface LogInFormProps extends AuthRequest {
-  onSubmit: (values: AuthRequest) => void
+interface LogInFormProps extends UserLogInRequest {
+  onSubmit: (values: UserLogInRequest) => void
 }
 
 const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
-  const handleSubmit = (credentials: AuthRequest) => {
+  const handleSubmit = (credentials: UserLogInRequest) => {
     onSubmit(credentials)
   }
 
@@ -28,7 +28,7 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
         onFinish={handleSubmit}
         autoComplete='off'
       >
-        <Form.Item<AuthRequest>
+        <Form.Item<UserLogInRequest>
           label='Username'
           name='name'
           rules={[{ required: true, message: 'Please input your username!' }]}
@@ -36,7 +36,7 @@ const LogInForm: React.FC<LogInFormProps> = ({ onSubmit }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<AuthRequest>
+        <Form.Item<UserLogInRequest>
           label='Password'
           name='password'
           rules={[{ required: true, message: 'Please input your password!' }]}

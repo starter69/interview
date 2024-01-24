@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Input } from 'antd'
 import { AuthRequest } from 'api/types'
 
@@ -7,6 +7,9 @@ interface RegisterProps extends AuthRequest {
 }
 
 const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
+	const [form] = Form.useForm()
+	const [isPasswordMatch, setIsPasswordMatch] = useState(false)
+
 	const handleSubmit = (credentials: AuthRequest) => {
 		onSubmit(credentials)
 	}
@@ -15,13 +18,13 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 		const { getFieldValue } = form
 
 		if (value && getFieldValue('password') === value) {
+			setIsPasswordMatch(true)
 			return Promise.resolve()
+		} else {
+			setIsPasswordMatch(false)
+			return Promise.reject('The two passwords that you entered do not match!')
 		}
-
-		return Promise.reject('The two passwords that you entered do not match!')
 	}
-
-	const [form] = Form.useForm()
 
 	return (
 		<div
@@ -69,7 +72,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 				</Form.Item>
 
 				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-					<Button type='primary' htmlType='submit'>
+					<Button type='primary' htmlType='submit' disabled={!isPasswordMatch}>
 						Sign Up
 					</Button>
 				</Form.Item>

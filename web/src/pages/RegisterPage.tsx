@@ -1,5 +1,5 @@
 import RegisterForm from 'components/RegisterForm'
-import { userRegister } from 'api'
+import * as api from 'api'
 import { UserRegisterRequest } from 'api/types'
 import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom'
 const Register = () => {
   const navigate = useNavigate()
   const handleSubmit = (values: UserRegisterRequest) => {
-    userRegister({
-      name: values.name,
-      password: values.password,
-      team_id: values.team_id ? Number(values.team_id) : undefined,
-    })
+    api
+      .Register({
+        name: values.name,
+        password: values.password,
+        team_id: values.team_id ? Number(values.team_id) : undefined,
+      })
       .then((response) => {
         message.success('Registered and logged in successfully')
         localStorage.setItem('authToken', response.data.access_token)

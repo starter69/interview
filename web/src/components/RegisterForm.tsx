@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getTeamNameList } from 'api'
+import * as api from 'api'
 import { Button, Form, Input, Select } from 'antd'
 import { ReferenceType, UserRegisterRequest } from 'api/types'
 
@@ -11,7 +11,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
   const [teams, setTeams] = useState([])
 
   useEffect(() => {
-    ;(async () => setTeams((await getTeamNameList()).data))()
+    ;(async () => setTeams((await api.getTeams()).data))()
   }, [])
 
   const [form] = Form.useForm()

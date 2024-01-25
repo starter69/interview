@@ -16,7 +16,7 @@ export class AuthService {
     private config: ConfigService
   ) {}
 
-  async signup(dto: RegisterDto) {
+  async register(dto: RegisterDto) {
     const password = await argon.hash(dto.password)
 
     try {
@@ -29,7 +29,7 @@ export class AuthService {
         },
       })
 
-      return this.signToken(user.id, user.name)
+      return this.getSignToken(user.id, user.name)
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
@@ -42,7 +42,7 @@ export class AuthService {
     }
   }
 
-  async signin(dto: LoginDto) {
+  async login(dto: LoginDto) {
     const user = await this.prisma.users.findUnique({
       where: { name: dto.name },
     })
@@ -55,10 +55,10 @@ export class AuthService {
       throw new ForbiddenException('The password you entered is incorrect.')
     }
 
-    return this.signToken(user.id, user.name)
+    return this.getSignToken(user.id, user.name)
   }
 
-  async signToken(userId: number, name: string) {
+  async getSignToken(userId: number, name: string) {
     const payload = { sub: userId, name }
 
     const token = await this.jwt.signAsync(payload, {

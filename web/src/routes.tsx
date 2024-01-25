@@ -1,36 +1,43 @@
 import * as React from 'react'
-import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 
-const Dashboard = React.lazy(() => import('pages/Dashboard'))
-const LogIn = React.lazy(() => import('pages/LogIn'))
-const Register = React.lazy(() => import('pages/Register'))
+const LoginPage = React.lazy(() => import('pages/LoginPage'))
+const RegisterPage = React.lazy(() => import('pages/RegisterPage'))
+const DashboardPage = React.lazy(() => import('pages/DashboardPage'))
 
 function isAuthenticated() {
   const token = localStorage.getItem('authToken')
   return token !== null
 }
 
-function AuthenticatedRoute() {
-  return isAuthenticated() ? <Outlet /> : <Navigate to='/signin' />
+function GetInitialRoute() {
+  return isAuthenticated() ? (
+    <Navigate to='/dashboard' />
+  ) : (
+    <Navigate to='/login' />
+  )
 }
 
 const routes = [
-  // Public routes
-  { path: '/signin', element: <LogIn /> },
-  { path: '/signup', element: <Register /> },
-
-  // Private routes
+  { path: '/', element: <GetInitialRoute /> },
+  { path: '/login', element: <LoginPage /> },
+  { path: '/register', element: <RegisterPage /> },
   {
-    path: '/',
-    element: <AuthenticatedRoute />,
-    children: [
-      { path: '/dashboard', element: <Dashboard /> },
-      // other routes that require authentication can go here
-    ],
+    path: '/dashboard',
+    element: <DashboardPage />,
   },
-
-  // Default route
-  { path: '*', element: <Navigate to='/signin' replace /> },
+  {
+    path: '/my-interview',
+    element: <DashboardPage />,
+  },
+  {
+    path: '/users',
+    element: <DashboardPage />,
+  },
+  {
+    path: '/teams',
+    element: <DashboardPage />,
+  },
 ]
 
 export const router = createBrowserRouter(routes)

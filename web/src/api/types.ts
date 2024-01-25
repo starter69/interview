@@ -1,9 +1,9 @@
-export type UserLogInRequest = {
+export type UserLoginRequest = {
   name: string
   password: string
 }
 
-export type UserRegisterRequest = UserLogInRequest & {
+export type UserRegisterRequest = UserLoginRequest & {
   team_id?: number
 }
 

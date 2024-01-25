@@ -14,7 +14,11 @@ export class PrismaService extends PrismaClient {
     })
   }
 
-  cleanDb() {
-    return this.$transaction([this.users.deleteMany()])
+  async onModuleInit() {
+    await this.$connect()
   }
+
+  // cleanDb() {
+  //   return this.$transaction([this.users.deleteMany()])
+  // }
 }

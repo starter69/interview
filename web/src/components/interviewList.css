@@ -1,0 +1,46 @@
+.video-thumbnail {
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.8s ease;
+  background-color: white;
+}
+
+.thumbnail-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(100vw / 30);
+  color: rgba(255, 255, 255, 0.8);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.user-info {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(100vw / 60);
+  color: rgba(255, 255, 255, 0.8);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.video-thumbnail:hover .play-icon {
+  opacity: 1;
+}
+
+.video-thumbnail:hover .user-info {
+  opacity: 1;
+}
+
+.video-thumbnail:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}

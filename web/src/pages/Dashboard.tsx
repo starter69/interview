@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getHelloWorldMsg } from 'api'
 import Navbar from 'components/Navbar'
+import InterviewList from 'components/InterviewList'
 
 const Dashboard = () => {
   const [msg, setMsg] = useState()
@@ -13,6 +14,7 @@ const Dashboard = () => {
     <div>
       <Navbar />
       <h1>{msg}</h1>
+      <InterviewList />
     </div>
   )
 }

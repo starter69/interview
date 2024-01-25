@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { Menu, Avatar, Space } from 'antd'
-import { getUser } from 'api'
+import * as api from 'api'
 import { UserInfo } from 'api/types'
 import { useNavigate } from 'react-router'
 import { UserOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [currentUser, setCurrentUser] = useState<UserInfo>()
   const navigate = useNavigate()
 
   useEffect(() => {
-    ;(async () => setCurrentUser((await getUser()).data))()
+    ;(async () => setCurrentUser((await api.getCurrentUser()).data))()
   }, [])
 
   const handleLogout = () => {
@@ -20,8 +21,18 @@ const Navbar = () => {
 
   return (
     <Menu mode='horizontal' theme='dark'>
-      <Menu.Item key='dashboard'>Dashboard</Menu.Item>
-      <Menu.Item key='myInterview'>My Interview</Menu.Item>
+      <Menu.Item key='dashboard'>
+        <Link to={`/dashboard`}>Dashboard</Link>
+      </Menu.Item>
+      <Menu.Item key='myInterview'>
+        <Link to={`/my-interview`}>My Interview</Link>
+      </Menu.Item>
+      <Menu.Item key='users'>
+        <Link to={`/users`}>Users</Link>
+      </Menu.Item>
+      <Menu.Item key='teams'>
+        <Link to={`/teams`}>Teams</Link>
+      </Menu.Item>
       {currentUser ? (
         <Menu.SubMenu
           key='User'

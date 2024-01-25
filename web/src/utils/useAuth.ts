@@ -1,4 +1,4 @@
-import { getUser } from 'api'
+import * as api from 'api'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,8 @@ export const useAuth = () => {
     const token = localStorage.getItem('authToken')
 
     if (token)
-      getUser()
+      api
+        .getCurrentUser()
         .then(() => {
           navigate('/dashboard')
         })

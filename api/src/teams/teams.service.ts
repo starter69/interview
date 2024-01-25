@@ -2,18 +2,19 @@ import { Injectable } from '@nestjs/common'
 import { CreateTeamDto } from './dto/create-team.dto'
 import { UpdateTeamDto } from './dto/update-team.dto'
 import { PrismaService } from 'src/prisma/prisma.service'
+// import { Prisma } from '@prisma/client'
 
 @Injectable()
-export class TeamService {
+export class TeamsService {
   constructor(private prisma: PrismaService) {}
 
   create(createTeamDto: CreateTeamDto) {
     return 'This action adds a new team'
   }
 
-  async findAll() {
-    const teams = await this.prisma.teams.findMany()
-    return teams
+  findAll() {
+    return this.prisma.teams.findMany()
+    // return `This action returns all teams`
   }
 
   findOne(id: number) {

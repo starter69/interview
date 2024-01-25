@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { UserLogInRequest, UserRegisterRequest } from './types'
+import { UserLoginRequest, UserRegisterRequest } from './types'
 
 const host = process.env.REACT_APP_API_HOST || 'localhost'
 const port = process.env.REACT_APP_API_PORT || 3001
 
 const apiService = axios.create({
-  baseURL: `http://${host}:${port}`,
+  baseURL: `http://${host}:${port}/`,
 })
 
 apiService.interceptors.request.use(
@@ -23,17 +23,18 @@ apiService.interceptors.request.use(
   }
 )
 
-export const getHelloWorldMsg = () => apiService.get('/hello-world')
-
 // Auth
-export const userLogin = (data: UserLogInRequest) =>
-  apiService.post('/auth/signin', data)
+const Login = (data: UserLoginRequest) => apiService.post('auth/login', data)
 
-export const getUser = () => apiService.get('/user')
+const Register = (data: UserRegisterRequest) =>
+  apiService.post('auth/register', data)
 
-export const userRegister = (data: UserRegisterRequest) =>
-  apiService.post('/auth/signup', data)
+const getCurrentUser = () => apiService.get('auth/user')
 
 // Teams
+const getTeams = () => apiService.get('teams')
 
-export const getTeamNameList = () => apiService.get('/team')
+// Users
+// const getUserData = () => apiService.get('/users')
+
+export { Login, Register, getCurrentUser, getTeams }

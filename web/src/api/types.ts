@@ -18,3 +18,9 @@ export type ReferenceType = {
   id: number
   name: string
 }
+
+export type InterviewType = {
+  id: number
+  user_id: number
+  name: string
+}

@@ -1,12 +1,23 @@
-import React from 'react'
-import { Pagination, Row, Col } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Pagination, Row, Col, Input, Select, Flex } from 'antd'
 import { PlayCircleOutlined } from '@ant-design/icons'
+import { getInterviewsList, getTeamNameList } from 'api'
+import { InterviewType, ReferenceType } from 'api/types'
 import './interviewList.css'
+
+const { Search } = Input
 
 const InterviewList: React.FC = () => {
   const [currentPage, setCurrentPage] = React.useState(1)
+  const [teams, setTeams] = useState([])
+  const [interviews, setInterviews] = useState<InterviewType[]>([])
   const videosPerPage = 12
-  const totalVideos = 26 // Assuming you have a total of 26 videos
+  const totalVideos = interviews.length // Assuming you have a total of 26 videos
+
+  useEffect(() => {
+    ;(async () => setTeams((await getTeamNameList()).data))()
+    setInterviews(getInterviewsList())
+  }, [])
 
   const handleChangePage = (page: number) => {
     setCurrentPage(page)
@@ -30,18 +41,55 @@ const InterviewList: React.FC = () => {
             <div className='play-icon'>
               <PlayCircleOutlined />
             </div>
-            <p className='user-info'>Team 3: Bear</p>
+            <p className='user-info'>
+              {interviews[i].name}: {interviews[i].user_id}
+            </p>
           </div>
         </Col>
       )
     }
-
     return videos
   }
 
+  const handleSearch = () => {}
+
+  const handleTeamFilter = () => {}
+
   return (
     <>
-      <Row gutter={[16, 16]}>{renderVideos()}</Row>
+      <Flex
+        gap='middle'
+        justify='space-evenly'
+        align='center'
+        style={{ marginBottom: '32px' }}
+      >
+        <div>
+          <span>Filter: </span>
+          <Select
+            style={{ width: '200px' }}
+            allowClear
+            onChange={handleTeamFilter}
+          >
+            {teams &&
+              teams.map((team: ReferenceType) => (
+                <Select.Option key={team.id} value={team.id.toString()}>
+                  {team.name}
+                </Select.Option>
+              ))}
+          </Select>
+        </div>
+        <div>
+          <Search
+            placeholder='Search for username'
+            allowClear
+            enterButton='Search'
+            onSearch={handleSearch}
+          />
+        </div>
+      </Flex>
+      <Row style={{ margin: '0' }} gutter={[16, 16]}>
+        {renderVideos()}
+      </Row>
 
       <Pagination
         current={currentPage}

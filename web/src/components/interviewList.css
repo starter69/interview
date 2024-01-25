@@ -44,3 +44,7 @@
 .video-thumbnail:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.team-filter {
+  max-width: 200px;
+}

@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken')
-    navigate('/signin')
+    navigate('/login')
   }
 
   return (

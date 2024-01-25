@@ -34,8 +34,6 @@ const getCurrentUser = () => apiService.get('auth/user')
 // Teams
 const getTeams = () => apiService.get('teams')
 
-export const getTeamNameList = () => apiService.get('/team')
-
 // Interview
 export const getInterviewsList = () => {
   return [

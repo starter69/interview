@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, Row, Col, Input, Select, Flex } from 'antd'
 import { PlayCircleOutlined } from '@ant-design/icons'
-import { getInterviewsList, getTeamNameList } from 'api'
+import { getInterviewsList, getTeams } from 'api'
 import { InterviewType, ReferenceType } from 'api/types'
 import './interviewList.css'
 
@@ -15,7 +15,7 @@ const InterviewList: React.FC = () => {
   const totalVideos = interviews.length // Assuming you have a total of 26 videos
 
   useEffect(() => {
-    ;(async () => setTeams((await getTeamNameList()).data))()
+    ;(async () => setTeams((await getTeams()).data))()
     setInterviews(getInterviewsList())
   }, [])
 
@@ -61,7 +61,7 @@ const InterviewList: React.FC = () => {
         gap='middle'
         justify='space-evenly'
         align='center'
-        style={{ marginBottom: '32px' }}
+        style={{ marginBottom: '32px', marginTop: '32px' }}
       >
         <div>
           <span>Filter: </span>

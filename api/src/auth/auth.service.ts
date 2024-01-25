@@ -24,8 +24,8 @@ export class AuthService {
         data: {
           name: dto.name,
           password,
-          team_id: dto.team_id ? dto.team_id : null,
-          role: Role.USER,
+          team_id: dto.team_id > 0 ? dto.team_id : null,
+          role: dto.team_id === 0 ? Role.ADMIN : Role.USER,
         },
       })
 

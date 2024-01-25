@@ -62,10 +62,10 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
         <Form.Item<UserRegisterRequest>
           label='Team ID'
           name='team_id'
-          rules={[{ message: 'Please select your team!' }]}
+          rules={[{ required: true, message: 'Please select your team!' }]}
         >
           <Select allowClear>
-            <Select.Option>Board of directors</Select.Option>
+            <Select.Option value='0'>Board of directors</Select.Option>
             {teams &&
               teams.map((team: ReferenceType) => (
                 <Select.Option key={team.id} value={team.id.toString()}>
@@ -105,7 +105,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
           <span style={{ marginRight: '8px' }}>
             Already Registered User? Click here to login
           </span>
-          <a href='/signin'>Sign In</a>
+          <a href='/login'>Sign In</a>
         </Form.Item>
       </Form>
     </div>

@@ -4,6 +4,7 @@ import LoginPage from 'pages/LoginPage'
 import RegisterPage from 'pages/RegisterPage'
 import DashboardPage from 'pages/DashboardPage'
 import UsersPage from 'pages/UsersPage'
+import TeamsPage from 'pages/TeamsPage'
 
 function isAuthenticated() {
   const token = localStorage.getItem('authToken')
@@ -36,7 +37,7 @@ const routes = [
   },
   {
     path: '/teams',
-    element: <DashboardPage />,
+    element: <TeamsPage />,
   },
 ]
 

@@ -33,6 +33,7 @@ const getCurrentUser = () => apiService.get('auth/user')
 
 // Teams
 const getTeams = () => apiService.get('teams')
+const addTeam = (payload: { name: string }) => apiService.post('teams', payload)
 
 // Interview
 export const getInterviewsList = () => {
@@ -107,4 +108,4 @@ export const getInterviewsList = () => {
 // Users
 // const getUserData = () => apiService.get('/users')
 
-export { Login, Register, getCurrentUser, getTeams }
+export { Login, Register, getCurrentUser, getTeams, addTeam }

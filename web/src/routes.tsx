@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-
-const LoginPage = React.lazy(() => import('pages/LoginPage'))
-const RegisterPage = React.lazy(() => import('pages/RegisterPage'))
-const DashboardPage = React.lazy(() => import('pages/DashboardPage'))
+import LoginPage from 'pages/LoginPage'
+import RegisterPage from 'pages/RegisterPage'
+import DashboardPage from 'pages/DashboardPage'
+import UsersPage from 'pages/UsersPage'
+import TeamsPage from 'pages/TeamsPage'
 
 function isAuthenticated() {
   const token = localStorage.getItem('authToken')
@@ -32,11 +33,11 @@ const routes = [
   },
   {
     path: '/users',
-    element: <DashboardPage />,
+    element: <UsersPage />,
   },
   {
     path: '/teams',
-    element: <DashboardPage />,
+    element: <TeamsPage />,
   },
 ]
 
